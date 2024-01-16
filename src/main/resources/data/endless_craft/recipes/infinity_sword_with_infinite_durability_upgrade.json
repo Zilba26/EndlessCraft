@@ -1,0 +1,11 @@
+{
+  "type": "endless_craft:endless_upgrader",
+  "ingredients": {
+    "tool": {
+      "item": "endless_craft:infinity_sword"
+    },
+    "upgrade": {
+      "item": "endless_craft:infinite_durability_upgrade"
+    }
+  }
+}

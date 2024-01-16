@@ -1,0 +1,11 @@
+{
+  "type": "endless_craft:endless_upgrader",
+  "ingredients": {
+    "tool": {
+      "item": "endless_craft:control_stick"
+    },
+    "upgrade": {
+      "item": "endless_craft:army_upgrade"
+    }
+  }
+}

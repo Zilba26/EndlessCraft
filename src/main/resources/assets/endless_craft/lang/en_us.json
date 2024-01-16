@@ -1,0 +1,25 @@
+{
+  "item.endless_craft.control_stick": "Control Stick",
+  "item.endless_craft.star_fragment": "Star Fragment",
+
+  "item.endless_craft.upgrade.shift": "Hold Shift to show upgrades",
+  "item.endless_craft.upgrade.army": "Army : Level %s",
+  "item.endless_craft.upgrade.protection": "Protection : Level %s",
+  "item.endless_craft.upgrade.health": "Heath : Level %s",
+  "item.endless_craft.upgrade.life_steal": "Life Steal : Level %s",
+  "item.endless_craft.upgrade.infinite_durability": "Infinite Durability",
+
+  "item.endless_craft.army_upgrade": "Army Upgrade",
+  "item.endless_craft.protection_upgrade": "Protection Upgrade",
+  "item.endless_craft.health_upgrade": "Health Upgrade",
+  "item.endless_craft.life_steal_upgrade": "Life Steal Upgrade",
+  "item.endless_craft.infinite_durability_upgrade": "Infinite Durability Upgrade",
+
+  "item.endless_craft.infinity_sword": "Infinity Sword",
+
+  "block.endless_craft.endless_upgrader": "Endless Upgrader",
+  "block.endless_craft.meteorite": "Meteorite",
+  "block.endless_craft.star": "Star",
+
+  "creativetab.endless_craft_tab": "Endless Craft"
+}

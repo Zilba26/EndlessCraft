@@ -1,5 +1,6 @@
 package fr.zilba.endlesscraft.item.custom.tools;
 
+import fr.zilba.endlesscraft.EndlessCraft;
 import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgrade;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
@@ -21,11 +22,12 @@ public interface EndlessCraftToolsItem {
     if (pStack.hasTag()) {
       List<Component> finalPTooltipComponents = new ArrayList<>();
       AtomicBoolean hasUpgrade = new AtomicBoolean(false);
-      pStack.getTag().getAllKeys().forEach(key -> {
+      if (!pStack.hasTag() || !pStack.getTag().contains(EndlessCraft.MOD_ID)) return;
+      pStack.getTag().getCompound(EndlessCraft.MOD_ID).getAllKeys().forEach(key -> {
         if (Arrays.stream(EndlessCraftUpgrade.values()).map(EndlessCraftUpgrade::getKey).anyMatch(key::equals)) {
           finalPTooltipComponents.add(
               Component.translatable("item.endless_craft.upgrade." + key,
-                  pStack.getTag().getInt(key)).withStyle(ChatFormatting.YELLOW));
+                  pStack.getTag().getCompound(EndlessCraft.MOD_ID).getInt(key)).withStyle(ChatFormatting.YELLOW));
           hasUpgrade.set(true);
         }
       });

@@ -1,5 +1,6 @@
 package fr.zilba.endlesscraft.item.custom.upgrade;
 
+import fr.zilba.endlesscraft.EndlessCraft;
 import fr.zilba.endlesscraft.item.custom.tools.EndlessCraftToolsItem;
 import net.minecraft.world.item.ItemStack;
 
@@ -9,6 +10,7 @@ public enum EndlessCraftUpgrade {
   PROTECTION("protection", 4),
   HEALTH("health", 5),
   LIFE_STEAL("life_steal", 5),
+  FIRE_RESISTANCE("fire_resistance", 1),
   INFINITE_DURABILITY("infinite_durability", 1);
 
   private final String key;
@@ -29,9 +31,9 @@ public enum EndlessCraftUpgrade {
 
   public static int getItemLevel(ItemStack stack, EndlessCraftUpgrade upgrade) {
     if (stack.getItem() instanceof EndlessCraftToolsItem) {
-      if (stack.hasTag()) {
-        if (stack.getTag().contains(upgrade.getKey())) {
-          return stack.getTag().getInt(upgrade.getKey());
+      if (stack.hasTag() && stack.getTag().contains(EndlessCraft.MOD_ID)) {
+        if (stack.getTag().getCompound(EndlessCraft.MOD_ID).contains(upgrade.getKey())) {
+          return stack.getTag().getCompound(EndlessCraft.MOD_ID).getInt(upgrade.getKey());
         }
       }
     }

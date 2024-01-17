@@ -15,7 +15,7 @@ import java.util.List;
 public class ModToolTiers {
 
   public static final Tier INFINITY = TierSortingRegistry.registerTier(
-      new ForgeTier(10, 10000, 8.0F, 20.0F, 20,
+      new ForgeTier(10, 50000, 8.0F, 20.0F, 20,
           ModTags.Blocks.NEEDS_INFINITY_TOOL, () -> Ingredient.of(Items.NETHER_STAR)),
       new ResourceLocation(EndlessCraft.MOD_ID, "infinity"), List.of(Tiers.NETHERITE), List.of()
   );

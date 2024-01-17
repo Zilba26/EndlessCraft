@@ -1,5 +1,6 @@
 package fr.zilba.endlesscraft.block.entity;
 
+import fr.zilba.endlesscraft.EndlessCraft;
 import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgradeItem;
 import fr.zilba.endlesscraft.recipe.EndlessUpgraderRecipe;
 import fr.zilba.endlesscraft.screen.EndlessUpgraderMenu;
@@ -100,13 +101,18 @@ public class EndlessUpgraderBlockEntity extends BlockEntity implements MenuProvi
     } else {
       itemHandler.setStackInSlot(RESULT_SLOT, ItemStack.EMPTY);
     }
+    setChanged();
   }
 
   private boolean hasRecipe() {
     Optional<EndlessUpgraderRecipe> recipe = getCurrentRecipe();
     if (recipe.isPresent()) {
       EndlessCraftUpgradeItem upgrade = (EndlessCraftUpgradeItem) itemHandler.getStackInSlot(UPGRADE_SLOT).getItem();
-      return itemHandler.getStackInSlot(TOOL_SLOT).getOrCreateTag().getInt(upgrade.getKeyName()) < upgrade.getMaxLevel();
+      ItemStack tool = itemHandler.getStackInSlot(TOOL_SLOT);
+      if (tool.hasTag() && tool.getTag().contains(EndlessCraft.MOD_ID)) {
+        return tool.getTag().getCompound(EndlessCraft.MOD_ID).getInt(upgrade.getKeyName()) < upgrade.getMaxLevel();
+      }
+      return true;
     }
     return false;
   }

@@ -1,9 +1,14 @@
 package fr.zilba.endlesscraft.item.custom.tools;
 
 import fr.zilba.endlesscraft.item.ModToolTiers;
+import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgrade;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -25,8 +30,26 @@ public class InfinitySword extends SwordItem implements EndlessCraftToolsItem {
   }
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-    System.out.println("infinity dura " + this.getDamage(pPlayer.getItemInHand(pUsedHand)));
-    return super.use(pLevel, pPlayer, pUsedHand);
+  public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+    this.healEntity(pStack, pAttacker);
+    this.giveFireResistanceEffect(pStack, pAttacker);
+    pStack.hurtAndBreak(10, pAttacker, (p_43296_) -> {
+      p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+    });
+    return true;
+  }
+
+  private void healEntity(ItemStack stack, LivingEntity entity) {
+    int lifeSteal = EndlessCraftUpgrade.getItemLevel(stack, EndlessCraftUpgrade.LIFE_STEAL);
+    if (lifeSteal > 0) {
+      entity.heal(lifeSteal);
+    }
+  }
+
+  private void giveFireResistanceEffect(ItemStack stack, LivingEntity entity) {
+    int fireResistance = EndlessCraftUpgrade.getItemLevel(stack, EndlessCraftUpgrade.FIRE_RESISTANCE);
+    if (fireResistance > 0) {
+      entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 20 * 10));
+    }
   }
 }

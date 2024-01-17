@@ -25,6 +25,7 @@ public class ModCreativeModTabs {
             output.accept(ModItems.PROTECTION_UPGRADE.get());
             output.accept(ModItems.HEALTH_UPGRADE.get());
             output.accept(ModItems.LIFE_STEAL_UPGRADE.get());
+            output.accept(ModItems.FIRE_RESISTANCE_UPGRADE.get());
             output.accept(ModItems.INFINITE_DURABILITY_UPGRADE.get());
             output.accept(ModItems.STAR_FRAGMENT.get());
             output.accept(ModItems.INFINITY_SWORD.get());

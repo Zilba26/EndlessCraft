@@ -68,17 +68,15 @@ public class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
     ItemStack result = tool.copy();
     EndlessCraftUpgradeItem upgrade = (EndlessCraftUpgradeItem) getUpgrade().getItem();
 
-    result.getOrCreateTag().putInt(upgrade.getKeyName(),
-        result.getOrCreateTag().getInt(upgrade.getKeyName()) + 1);
+    CompoundTag tag = result.getOrCreateTag();
+    if (!tag.contains(EndlessCraft.MOD_ID)) {
+      tag.put(EndlessCraft.MOD_ID, new CompoundTag());
+    }
+    tag.getCompound(EndlessCraft.MOD_ID).putInt(upgrade.getKeyName(),
+        tag.getCompound(EndlessCraft.MOD_ID).getInt(upgrade.getKeyName()) + 1);
 
     if (this.getUpgrade().getItem() instanceof InfiniteDurabilityUpgrade) {
-      if (!result.hasTag()) {
-        CompoundTag tag = new CompoundTag();
-        tag.putBoolean("Unbreakable", true);
-        result.setTag(tag);
-      } else {
-        result.getTag().putBoolean("Unbreakable", true);
-      }
+      result.getTag().putBoolean("Unbreakable", true);
     }
     return result;
   }

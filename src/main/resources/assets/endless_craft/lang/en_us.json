@@ -7,12 +7,14 @@
   "item.endless_craft.upgrade.protection": "Protection : Level %s",
   "item.endless_craft.upgrade.health": "Heath : Level %s",
   "item.endless_craft.upgrade.life_steal": "Life Steal : Level %s",
+  "item.endless_craft.upgrade.fire_resistance": "Fire Resistance",
   "item.endless_craft.upgrade.infinite_durability": "Infinite Durability",
 
   "item.endless_craft.army_upgrade": "Army Upgrade",
   "item.endless_craft.protection_upgrade": "Protection Upgrade",
   "item.endless_craft.health_upgrade": "Health Upgrade",
   "item.endless_craft.life_steal_upgrade": "Life Steal Upgrade",
+  "item.endless_craft.fire_resistance_upgrade": "Fire Resistance Upgrade",
   "item.endless_craft.infinite_durability_upgrade": "Infinite Durability Upgrade",
 
   "item.endless_craft.infinity_sword": "Infinity Sword",

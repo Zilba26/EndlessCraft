@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class EndlessUpgraderMenu extends AbstractContainerMenu {
 
@@ -38,15 +39,21 @@ public class EndlessUpgraderMenu extends AbstractContainerMenu {
       addSlot(new SlotItemHandler(iItemHandler, 0, 26, 48) {
         @Override
         public boolean mayPlace(ItemStack pStack) {
-          return pStack.getItem() instanceof EndlessCraftToolsItem;
+          return pStack.getItem() instanceof EndlessCraftToolsItem
+              || pStack.getItem() instanceof EndlessCraftUpgradeItem;
         }
-      });
-      addSlot(new SlotItemHandler(iItemHandler, 1, 44, 48) {
+
         @Override
-        public boolean mayPlace(ItemStack pStack) {
-          return pStack.getItem() instanceof EndlessCraftUpgradeItem;
+        public int getMaxStackSize() {
+          return 1;
+        }
+
+        @Override
+        public int getMaxStackSize(@NotNull ItemStack stack) {
+          return 1;
         }
       });
+      addSlot(new SlotItemHandler(iItemHandler, 1, 44, 48));
       addSlot(new SlotItemHandler(iItemHandler, 2, 98, 48) {
         @Override
         public boolean mayPlace(ItemStack pStack) {

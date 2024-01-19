@@ -39,4 +39,15 @@ public enum EndlessCraftUpgrade {
     }
     return 0;
   }
+
+  public static int getLevel(ItemStack stack) {
+    if (stack.getItem() instanceof EndlessCraftUpgradeItem) {
+      if (stack.hasTag() && stack.getTag().contains(EndlessCraft.MOD_ID)) {
+        if (stack.getTag().getCompound(EndlessCraft.MOD_ID).contains("level")) {
+          return stack.getTag().getCompound(EndlessCraft.MOD_ID).getInt("level");
+        }
+      }
+    }
+    return 0;
+  }
 }

@@ -1,8 +1,11 @@
 package fr.zilba.endlesscraft.block.entity;
 
 import fr.zilba.endlesscraft.EndlessCraft;
+import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgradeItem;
 import fr.zilba.endlesscraft.recipe.EndlessUpgraderRecipe;
+import fr.zilba.endlesscraft.recipe.EndlessUpgraderToolRecipe;
+import fr.zilba.endlesscraft.recipe.EndlessUpgraderUpgradeRecipe;
 import fr.zilba.endlesscraft.screen.EndlessUpgraderMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -107,12 +110,18 @@ public class EndlessUpgraderBlockEntity extends BlockEntity implements MenuProvi
   private boolean hasRecipe() {
     Optional<EndlessUpgraderRecipe> recipe = getCurrentRecipe();
     if (recipe.isPresent()) {
-      EndlessCraftUpgradeItem upgrade = (EndlessCraftUpgradeItem) itemHandler.getStackInSlot(UPGRADE_SLOT).getItem();
-      ItemStack tool = itemHandler.getStackInSlot(TOOL_SLOT);
-      if (tool.hasTag() && tool.getTag().contains(EndlessCraft.MOD_ID)) {
-        return tool.getTag().getCompound(EndlessCraft.MOD_ID).getInt(upgrade.getKeyName()) < upgrade.getMaxLevel();
+      if (recipe.get() instanceof EndlessUpgraderToolRecipe) {
+        ItemStack upgradeStack = itemHandler.getStackInSlot(UPGRADE_SLOT);
+        EndlessCraftUpgradeItem upgrade = (EndlessCraftUpgradeItem) upgradeStack.getItem();
+        ItemStack tool = itemHandler.getStackInSlot(TOOL_SLOT);
+        if (tool.hasTag() && tool.getTag().contains(EndlessCraft.MOD_ID)) {
+          return tool.getTag().getCompound(EndlessCraft.MOD_ID).getInt(upgrade.getKeyName())
+              < EndlessCraftUpgrade.getLevel(upgradeStack);
+        }
+        return true;
       }
-      return true;
+
+      return recipe.get() instanceof EndlessUpgraderUpgradeRecipe;
     }
     return false;
   }
@@ -129,7 +138,8 @@ public class EndlessUpgraderBlockEntity extends BlockEntity implements MenuProvi
   private void craftItem() {
     Optional<EndlessUpgraderRecipe> recipe = getCurrentRecipe();
     ItemStack tool = itemHandler.getStackInSlot(TOOL_SLOT);
-    ItemStack result = recipe.get().getResultByTool(tool);
+    ItemStack upgrade = itemHandler.getStackInSlot(UPGRADE_SLOT);
+    ItemStack result = recipe.get().getResultByBase(tool, upgrade);
 
     itemHandler.setStackInSlot(RESULT_SLOT, result);
   }

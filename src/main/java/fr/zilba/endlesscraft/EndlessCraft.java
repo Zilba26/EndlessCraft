@@ -6,12 +6,14 @@ import fr.zilba.endlesscraft.block.entity.ModBlocksEntities;
 import fr.zilba.endlesscraft.item.ModCreativeModTabs;
 import fr.zilba.endlesscraft.item.ModItems;
 import fr.zilba.endlesscraft.recipe.ModRecipes;
+import fr.zilba.endlesscraft.recipe.ingredient.LevelNbtIngredient;
 import fr.zilba.endlesscraft.screen.EndlessUpgraderScreen;
 import fr.zilba.endlesscraft.screen.ModMenuTypes;
 import fr.zilba.endlesscraft.structure.ModStructures;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,6 +22,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -48,6 +52,7 @@ public class EndlessCraft
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::registerSerializers);
         modEventBus.addListener(this::addCreative);
     }
 
@@ -70,5 +75,11 @@ public class EndlessCraft
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.ENDLESS_UPGRADER_MENU.get(), EndlessUpgraderScreen::new);
         }
+    }
+
+    public void registerSerializers(RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,
+            helper -> CraftingHelper.register(LevelNbtIngredient.Serializer.NAME, LevelNbtIngredient.Serializer.INSTANCE)
+        );
     }
 }

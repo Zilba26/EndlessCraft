@@ -2,6 +2,7 @@
   "item.endless_craft.control_stick": "Control Stick",
   "item.endless_craft.star_fragment": "Star Fragment",
 
+  "item.endless_craft.upgrade.level": "Level : %s",
   "item.endless_craft.upgrade.shift": "Hold Shift to show upgrades",
   "item.endless_craft.upgrade.army": "Army : Level %s",
   "item.endless_craft.upgrade.protection": "Protection : Level %s",

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  *",
+    " + ",
+    "/  "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "+": {
+      "item": "minecraft:nether_star"
+    },
+    "*": {
+      "item": "endless_craft:star_fragment"
+    }
+  },
+  "result": {
+    "item": "endless_craft:infinity_sword",
+    "count": 1
+  }
+}

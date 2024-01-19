@@ -1,25 +1,19 @@
 package fr.zilba.endlesscraft.recipe;
 
-import com.google.gson.JsonObject;
-import fr.zilba.endlesscraft.EndlessCraft;
-import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgrade;
-import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgradeItem;
-import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.InfiniteDurabilityUpgrade;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
-public class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
+public abstract class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
 
-  private final NonNullList<Ingredient> inputItems;
+  protected final NonNullList<Ingredient> inputItems;
   private final ResourceLocation id;
 
   public EndlessUpgraderRecipe(NonNullList<Ingredient> inputItems, ResourceLocation id) {
@@ -27,11 +21,11 @@ public class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
     this.id = id;
   }
 
-  public ItemStack getTool() {
+  public ItemStack getBase() {
     return inputItems.get(0).getItems()[0].copy();
   }
 
-  public ItemStack getUpgrade() {
+  public ItemStack getAddition() {
     return inputItems.get(1).getItems()[0].copy();
   }
 
@@ -61,25 +55,10 @@ public class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
 
   @Override
   public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-    return getResultByTool(getTool());
+    return this.getResultByBase(this.getBase(), this.getAddition());
   }
 
-  public ItemStack getResultByTool(ItemStack tool) {
-    ItemStack result = tool.copy();
-    EndlessCraftUpgradeItem upgrade = (EndlessCraftUpgradeItem) getUpgrade().getItem();
-
-    CompoundTag tag = result.getOrCreateTag();
-    if (!tag.contains(EndlessCraft.MOD_ID)) {
-      tag.put(EndlessCraft.MOD_ID, new CompoundTag());
-    }
-    tag.getCompound(EndlessCraft.MOD_ID).putInt(upgrade.getKeyName(),
-        tag.getCompound(EndlessCraft.MOD_ID).getInt(upgrade.getKeyName()) + 1);
-
-    if (this.getUpgrade().getItem() instanceof InfiniteDurabilityUpgrade) {
-      result.getTag().putBoolean("Unbreakable", true);
-    }
-    return result;
-  }
+  public abstract ItemStack getResultByBase(ItemStack base, ItemStack addition);
 
   @Override
   public ResourceLocation getId() {
@@ -87,9 +66,7 @@ public class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
-    return Serializer.INSTANCE;
-  }
+  public abstract RecipeSerializer<?> getSerializer();
 
   @Override
   public RecipeType<?> getType() {
@@ -102,39 +79,4 @@ public class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
     public static final String ID = "endless_upgrader";
   }
 
-  public static class Serializer implements RecipeSerializer<EndlessUpgraderRecipe> {
-
-    public static final Serializer INSTANCE = new Serializer();
-    public static final ResourceLocation ID = new ResourceLocation(EndlessCraft.MOD_ID, "endless_upgrader");
-
-    @Override
-    public EndlessUpgraderRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-      JsonObject ingredients = GsonHelper.getAsJsonObject(pSerializedRecipe, "ingredients");
-
-      NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
-
-      inputs.set(0, Ingredient.fromJson(ingredients.get("tool")));
-      inputs.set(1, Ingredient.fromJson(ingredients.get("upgrade")));
-
-      return new EndlessUpgraderRecipe(inputs, pRecipeId);
-    }
-
-    @Override
-    public @Nullable EndlessUpgraderRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-      NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
-
-      inputs.replaceAll(ignored -> Ingredient.fromNetwork(pBuffer));
-
-      return new EndlessUpgraderRecipe(inputs, pRecipeId);
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf pBuffer, EndlessUpgraderRecipe pRecipe) {
-      pBuffer.writeInt(pRecipe.inputItems.size());
-
-      for (Ingredient ingredient : pRecipe.getIngredients()) {
-        ingredient.toNetwork(pBuffer);
-      }
-    }
-  }
 }

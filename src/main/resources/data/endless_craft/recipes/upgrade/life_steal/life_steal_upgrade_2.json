@@ -1,0 +1,16 @@
+{
+  "type": "endless_craft:endless_upgrader_upgrade",
+  "base": {
+    "type": "endless_craft:level_nbt",
+    "item": "endless_craft:life_steal_upgrade",
+    "level": 1
+  },
+  "addition": {
+    "item": "minecraft:iron_block"
+  },
+  "result": {
+    "type": "endless_craft:level_nbt",
+    "item": "endless_craft:life_steal_upgrade",
+    "level": 2
+  }
+}

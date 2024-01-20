@@ -71,7 +71,6 @@ public class MeteoriteStructure extends Structure {
   private static Map<String, Integer> extraSpawningChecks(Structure.GenerationContext context) {
     // Grabs the chunk position we are at
     ChunkPos chunkpos = context.chunkPos();
-    System.out.println("Chunk middle coords : " + chunkpos.getMiddleBlockX() + " - " + chunkpos.getMiddleBlockZ());
 
     int min = 255;
     int max = -64;
@@ -113,12 +112,9 @@ public class MeteoriteStructure extends Structure {
     // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
     // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
     int startY = this.startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
-    System.out.println("startY: " + startY);
-    System.out.println("coords: " + coords);
     // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
     ChunkPos chunkPos = context.chunkPos();
     BlockPos blockPos = new BlockPos(chunkPos.getMaxBlockX(), coords.get("y"), chunkPos.getMaxBlockZ());
-    System.out.println("blockPos: " + blockPos);
 
     Optional<Structure.GenerationStub> structurePiecesGenerator =
         JigsawPlacement.addPieces(
@@ -146,19 +142,15 @@ public class MeteoriteStructure extends Structure {
     if (pRandom.nextInt(4) == 1) {
       BlockPos center = pPieces.calculateBoundingBox().getCenter().below(2);
       pLevel.setBlock(center, ModBlocks.STAR.get().defaultBlockState(), 2);
-      System.out.println("Placed star at " + center);
     }
 
-    System.out.println(pPieces.calculateBoundingBox());
     // Place meteorite blocks below the structure if it's air
-    System.out.println("Placing meteorite blocks");
     BoundingBox boundingBox = pPieces.calculateBoundingBox();
     for (int x = boundingBox.minX(); x <= boundingBox.maxX(); x++) {
       for (int z = boundingBox.minZ(); z <= boundingBox.maxZ(); z++) {
         for (int y = boundingBox.minY(); y >= 0; y--) {
           BlockPos pos = new BlockPos(x, y, z);
           if (pLevel.getBlockState(pos).isAir()) {
-            System.out.println("Placing meteorite block at " + pos);
             //pLevel.setBlock(pos, Blocks.RED_CONCRETE.defaultBlockState(), 2);
           } else {
             break;

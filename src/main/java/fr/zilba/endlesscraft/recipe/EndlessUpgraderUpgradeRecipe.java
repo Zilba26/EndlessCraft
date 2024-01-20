@@ -46,8 +46,6 @@ public class EndlessUpgraderUpgradeRecipe extends EndlessUpgraderRecipe {
     public EndlessUpgraderUpgradeRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
       ItemStack result = Ingredient.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe,
           "result")).getItems()[0];
-      System.out.println(result);
-      System.out.println(result.getOrCreateTag());
 
       NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 

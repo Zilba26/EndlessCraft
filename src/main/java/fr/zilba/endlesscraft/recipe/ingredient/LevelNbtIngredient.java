@@ -98,8 +98,6 @@ public class LevelNbtIngredient extends AbstractIngredient {
     @Override
     public LevelNbtIngredient parse(JsonObject json) {
 
-      System.out.println("\nparse LevelNbtIngredient");
-      System.out.println(json);
       String itemName = GsonHelper.getAsString(json, "item");
       Item item = getItem(itemName, false);
       if (json.has("level")) {
@@ -113,13 +111,10 @@ public class LevelNbtIngredient extends AbstractIngredient {
         tmp.putString("id", itemName);
         tmp.putInt("Count", GsonHelper.getAsInt(json, "count", 1));
 
-        System.out.println(tmp);
-        System.out.println(ItemStack.of(tmp));
         return new LevelNbtIngredient(ItemStack.of(tmp));
       }
 
       ItemStack stack = new ItemStack(item, GsonHelper.getAsInt(json, "count", 1));
-      System.out.println(stack);
       return new LevelNbtIngredient(stack);
     }
 

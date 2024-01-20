@@ -5,6 +5,8 @@ import fr.zilba.endlesscraft.block.ModBlocks;
 import fr.zilba.endlesscraft.block.entity.ModBlocksEntities;
 import fr.zilba.endlesscraft.item.ModCreativeModTabs;
 import fr.zilba.endlesscraft.item.ModItems;
+import fr.zilba.endlesscraft.potion.ModEffects;
+import fr.zilba.endlesscraft.potion.ModPotions;
 import fr.zilba.endlesscraft.recipe.ModRecipes;
 import fr.zilba.endlesscraft.recipe.ingredient.LevelNbtIngredient;
 import fr.zilba.endlesscraft.screen.EndlessUpgraderScreen;
@@ -48,6 +50,9 @@ public class EndlessCraft
         ModRecipes.register(modEventBus);
 
         ModStructures.register(modEventBus);
+
+        ModEffects.register(modEventBus);
+        ModPotions.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

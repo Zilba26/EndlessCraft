@@ -24,5 +24,7 @@
   "block.endless_craft.meteorite": "Meteorite",
   "block.endless_craft.star": "Star",
 
-  "creativetab.endless_craft_tab": "Endless Craft"
+  "creativetab.endless_craft_tab": "Endless Craft",
+
+  "effect.endless_craft.invulnerable": "Invulnerable"
 }

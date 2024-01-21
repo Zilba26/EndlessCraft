@@ -1,0 +1,6 @@
+{
+    "parent": "endless_craft:item/temporal_bow",
+    "textures": {
+        "layer0": "endless_craft:item/temporal_bow_pulling_2"
+    }
+}

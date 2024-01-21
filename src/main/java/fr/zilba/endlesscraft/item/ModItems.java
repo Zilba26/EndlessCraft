@@ -1,6 +1,7 @@
 package fr.zilba.endlesscraft.item;
 
 import fr.zilba.endlesscraft.EndlessCraft;
+import fr.zilba.endlesscraft.item.custom.TemporalArc;
 import fr.zilba.endlesscraft.item.custom.tools.InfinitySword;
 import fr.zilba.endlesscraft.item.custom.tools.ControlStickItem;
 import fr.zilba.endlesscraft.item.custom.upgrade.control_stick.ArmyUpgradeItem;
@@ -32,6 +33,9 @@ public class ModItems {
 
   public static final RegistryObject<Item> INFINITY_SWORD = ITEMS.register("infinity_sword",
       () -> new InfinitySword(new Item.Properties()));
+
+  public static final RegistryObject<Item> TEMPORAL_ARC = ITEMS.register("temporal_bow",
+      () -> new TemporalArc(new Item.Properties().durability(1000)));
 
   public static void register(IEventBus eventBus) {
     ITEMS.register(eventBus);

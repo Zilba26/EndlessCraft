@@ -3,6 +3,8 @@ package fr.zilba.endlesscraft;
 import com.mojang.logging.LogUtils;
 import fr.zilba.endlesscraft.block.ModBlocks;
 import fr.zilba.endlesscraft.block.entity.ModBlocksEntities;
+import fr.zilba.endlesscraft.client.renderer.TemporalArrowRenderer;
+import fr.zilba.endlesscraft.entity.ModEntities;
 import fr.zilba.endlesscraft.item.ModCreativeModTabs;
 import fr.zilba.endlesscraft.item.ModItems;
 import fr.zilba.endlesscraft.potion.ModEffects;
@@ -12,7 +14,12 @@ import fr.zilba.endlesscraft.recipe.ingredient.LevelNbtIngredient;
 import fr.zilba.endlesscraft.screen.EndlessUpgraderScreen;
 import fr.zilba.endlesscraft.screen.ModMenuTypes;
 import fr.zilba.endlesscraft.structure.ModStructures;
+import fr.zilba.endlesscraft.util.ModItemProperties;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -54,6 +61,8 @@ public class EndlessCraft
         ModEffects.register(modEventBus);
         ModPotions.register(modEventBus);
 
+        ModEntities.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -79,10 +88,14 @@ public class EndlessCraft
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.ENDLESS_UPGRADER_MENU.get(), EndlessUpgraderScreen::new);
+            
+            ModItemProperties.addCustomItemProperties();
+
+            EntityRenderers.register(ModEntities.TEMPORAL_ARROW.get(), TemporalArrowRenderer::new);
         }
     }
 
-    public void registerSerializers(RegisterEvent event) {
+    private void registerSerializers(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,
             helper -> CraftingHelper.register(LevelNbtIngredient.Serializer.NAME, LevelNbtIngredient.Serializer.INSTANCE)
         );

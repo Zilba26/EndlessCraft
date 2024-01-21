@@ -29,6 +29,7 @@ public class ModCreativeModTabs {
             output.accept(ModItems.INFINITE_DURABILITY_UPGRADE.get());
             output.accept(ModItems.STAR_FRAGMENT.get());
             output.accept(ModItems.INFINITY_SWORD.get());
+            output.accept(ModItems.TEMPORAL_ARC.get());
 
             output.accept(ModBlocks.ENDLESS_UPGRADER.get());
             output.accept(ModBlocks.METEORITE.get());

@@ -76,7 +76,7 @@ public abstract class EndlessUpgraderRecipe implements Recipe<SimpleContainer> {
   public static class Type implements RecipeType<EndlessUpgraderRecipe> {
 
     public static final Type INSTANCE = new Type();
-    public static final String ID = "endless_upgrader";
+    public static final String ID = "endless_upgrader.json";
   }
 
 }

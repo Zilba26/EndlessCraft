@@ -24,9 +24,6 @@ public abstract class EndlessCraftUpgradeItem extends Item {
   public String getKeyName() {
     return getUpgrade().getKey();
   }
-  public int getMaxLevel() {
-    return getUpgrade().getMaxLevel();
-  }
 
   @Override
   public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {

@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class EndlessUpgraderCategory implements IRecipeCategory<EndlessUpgraderRecipe> {
 
-  public static final ResourceLocation UID = new ResourceLocation(EndlessCraft.MOD_ID, "endless_upgrader");
+  public static final ResourceLocation UID = new ResourceLocation(EndlessCraft.MOD_ID, "endless_upgrader.json");
   public static final ResourceLocation TEXTURE = new ResourceLocation(EndlessCraft.MOD_ID,
       "textures/gui/endless_upgrader_gui.png");
   public static final RecipeType<EndlessUpgraderRecipe> ENDLESS_UPGRADER_TYPE =

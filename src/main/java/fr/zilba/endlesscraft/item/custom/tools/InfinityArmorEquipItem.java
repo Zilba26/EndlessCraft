@@ -32,22 +32,39 @@ public class InfinityArmorEquipItem extends Item implements ICurioItem, EndlessC
               player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 0, false, false, true));
             }
           }
-          if (EndlessCraftUpgrade.getItemLevel(stack, EndlessCraftUpgrade.FLY) > 0) {
-            if (!player.getAbilities().mayfly) {
-              player.getAbilities().mayfly = true;
-              player.onUpdateAbilities();
-            }
-          } else {
-            if (player.getAbilities().mayfly) {
-              player.getAbilities().mayfly = false;
-              player.getAbilities().flying = false;
-              player.onUpdateAbilities();
-            }
-          }
         }
       }
     }
     ICurioItem.super.curioTick(slotContext, stack);
+  }
+
+  @Override
+  public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+    if (!slotContext.entity().level().isClientSide()) {
+      if (slotContext.entity() instanceof Player player) {
+        if (hasInfinityArmor(player)) {
+          if (EndlessCraftUpgrade.getItemLevel(stack, EndlessCraftUpgrade.FLY) > 0) {
+            player.getAbilities().mayfly = true;
+            player.getAbilities().setFlyingSpeed(getMaxFlyingSpeed(stack));
+            player.onUpdateAbilities();
+          }
+        }
+      }
+    }
+    ICurioItem.super.onEquip(slotContext, prevStack, stack);
+  }
+
+  @Override
+  public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+    if (!slotContext.entity().level().isClientSide()) {
+      if (slotContext.entity() instanceof Player player) {
+        player.getAbilities().mayfly = false;
+        player.getAbilities().flying = false;
+        player.getAbilities().setFlyingSpeed(0.05f);
+        player.onUpdateAbilities();
+      }
+    }
+    ICurioItem.super.onUnequip(slotContext, newStack, stack);
   }
 
   private boolean hasInfinityArmor(Player player) {
@@ -67,6 +84,10 @@ public class InfinityArmorEquipItem extends Item implements ICurioItem, EndlessC
       }
     }
     return false;
+  }
+
+  private float getMaxFlyingSpeed(ItemStack stack) {
+    return 0.01f * (float) Math.pow(EndlessCraftUpgrade.getItemLevel(stack, EndlessCraftUpgrade.FLY), 2);
   }
 
   @Override

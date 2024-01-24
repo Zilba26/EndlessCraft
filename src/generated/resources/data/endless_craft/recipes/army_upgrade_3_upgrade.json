@@ -1,0 +1,16 @@
+{
+  "type": "endless_craft:endless_upgrader_upgrade",
+  "addition": {
+    "item": "minecraft:gold_ingot"
+  },
+  "base": {
+    "type": "endless_craft:level_nbt",
+    "item": "endless_craft:army_upgrade",
+    "level": 2
+  },
+  "result": {
+    "type": "endless_craft:level_nbt",
+    "item": "endless_craft:army_upgrade",
+    "level": 3
+  }
+}

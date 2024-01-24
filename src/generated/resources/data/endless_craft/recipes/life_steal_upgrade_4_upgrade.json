@@ -1,0 +1,16 @@
+{
+  "type": "endless_craft:endless_upgrader_upgrade",
+  "addition": {
+    "item": "minecraft:diamond_block"
+  },
+  "base": {
+    "type": "endless_craft:level_nbt",
+    "item": "endless_craft:life_steal_upgrade",
+    "level": 3
+  },
+  "result": {
+    "type": "endless_craft:level_nbt",
+    "item": "endless_craft:life_steal_upgrade",
+    "level": 4
+  }
+}

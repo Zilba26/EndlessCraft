@@ -60,7 +60,7 @@ public class EndlessUpgraderToolRecipe extends EndlessUpgraderRecipe {
   public static class Serializer implements RecipeSerializer<EndlessUpgraderToolRecipe> {
 
     public static final Serializer INSTANCE = new Serializer();
-    public static final ResourceLocation ID = new ResourceLocation(EndlessCraft.MOD_ID, "endless_upgrader");
+    public static final ResourceLocation ID = new ResourceLocation(EndlessCraft.MOD_ID, "endless_upgrader.json");
 
     @Override
     public EndlessUpgraderToolRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {

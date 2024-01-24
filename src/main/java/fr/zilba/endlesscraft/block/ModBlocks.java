@@ -22,7 +22,7 @@ public class ModBlocks {
       DeferredRegister.create(ForgeRegistries.BLOCKS, EndlessCraft.MOD_ID);
 
   public static final RegistryObject<Block> ENDLESS_UPGRADER = registerBlock("endless_upgrader",
-      () -> new EndlessUpgrader(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+      () -> new EndlessUpgrader(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
   public static final RegistryObject<Block> METEORITE = registerBlock("meteorite",
       () -> new Block(BlockBehaviour.Properties.copy(Blocks.BLACKSTONE)));

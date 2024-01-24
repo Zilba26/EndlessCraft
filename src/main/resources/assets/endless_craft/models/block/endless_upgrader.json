@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "endless_craft:block/endless_upgrader_texture"
+  }
+}

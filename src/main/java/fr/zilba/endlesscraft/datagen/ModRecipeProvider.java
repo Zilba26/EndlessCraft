@@ -1,14 +1,16 @@
 package fr.zilba.endlesscraft.datagen;
 
 import fr.zilba.endlesscraft.item.ModItems;
+import fr.zilba.endlesscraft.recipe.EndlessUpgraderRecipeBuilder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
@@ -19,7 +21,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
   @Override
   protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CONTROL_STICK.get())
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.CONTROL_STICK.get())
         .pattern("  *")
         .pattern(" / ")
         .pattern("/  ")
@@ -27,5 +29,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         .define('*', Items.NETHER_STAR)
         .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.BLAZE_ROD))
         .save(pWriter);
+
+    this.buildUpgradeRecipe(pWriter, ModItems.PROTECTION_UPGRADE.get(), List.of(Items.IRON_BLOCK, Items.GOLD_BLOCK, Items.DIAMOND_BLOCK, Items.NETHERITE_INGOT));
+    this.buildUpgradeRecipe(pWriter, ModItems.LIFE_STEAL_UPGRADE.get(), List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND_BLOCK, Items.NETHERITE_INGOT));
+    this.buildUpgradeRecipe(pWriter, ModItems.ARMY_UPGRADE.get(), List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND_BLOCK, Items.NETHERITE_INGOT));
+    this.buildUpgradeRecipe(pWriter, ModItems.FLY_UPGRADE.get(), List.of(Items.DIAMOND_BLOCK, Items.NETHERITE_SCRAP, Items.NETHERITE_INGOT, Items.NETHERITE_BLOCK));
+  }
+
+  private void buildUpgradeRecipe(Consumer<FinishedRecipe> pWriter, Item upgrade, List<ItemLike> levelsUpgrades) {
+    for (ItemLike levelUpgrade : levelsUpgrades) {
+      EndlessUpgraderRecipeBuilder
+          .upgrade(upgrade, Ingredient.of(levelUpgrade), levelsUpgrades.indexOf(levelUpgrade)+2, RecipeCategory.MISC)
+          .unlockedBy("has_" + getItemName(upgrade), has(levelUpgrade))
+          .save(pWriter);
+    }
   }
 }

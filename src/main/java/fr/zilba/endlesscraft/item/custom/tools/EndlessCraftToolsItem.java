@@ -26,7 +26,7 @@ public interface EndlessCraftToolsItem {
       pStack.getTag().getCompound(EndlessCraft.MOD_ID).getAllKeys().forEach(key -> {
         if (Arrays.stream(EndlessCraftUpgrade.values()).map(EndlessCraftUpgrade::getKey).anyMatch(key::equals)) {
           finalPTooltipComponents.add(
-              Component.translatable("item.endless_craft.upgrade." + key,
+              Component.translatable("tooltip.endless_craft.upgrade." + key,
                   pStack.getTag().getCompound(EndlessCraft.MOD_ID).getInt(key)).withStyle(ChatFormatting.YELLOW));
           hasUpgrade.set(true);
         }
@@ -35,7 +35,7 @@ public interface EndlessCraftToolsItem {
         if (Screen.hasShiftDown()) {
           pTooltipComponents.addAll(finalPTooltipComponents);
         } else {
-          pTooltipComponents.add(Component.translatable("item.endless_craft.upgrade.shift")
+          pTooltipComponents.add(Component.translatable("tooltip.endless_craft.upgrade.shift")
               .withStyle(ChatFormatting.DARK_GRAY));
         }
       }

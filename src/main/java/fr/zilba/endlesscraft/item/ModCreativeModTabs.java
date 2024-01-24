@@ -27,9 +27,16 @@ public class ModCreativeModTabs {
             output.accept(ModItems.LIFE_STEAL_UPGRADE.get());
             output.accept(ModItems.FIRE_RESISTANCE_UPGRADE.get());
             output.accept(ModItems.INFINITE_DURABILITY_UPGRADE.get());
+            output.accept(ModItems.NIGHT_VISION_UPGRADE.get());
+            output.accept(ModItems.FLY_UPGRADE.get());
             output.accept(ModItems.STAR_FRAGMENT.get());
             output.accept(ModItems.INFINITY_SWORD.get());
             output.accept(ModItems.TEMPORAL_ARC.get());
+            output.accept(ModItems.INFINITY_HELMET.get());
+            output.accept(ModItems.INFINITY_CHESTPLATE.get());
+            output.accept(ModItems.INFINITY_LEGGINGS.get());
+            output.accept(ModItems.INFINITY_BOOTS.get());
+            output.accept(ModItems.INFINITY_ARMOR.get());
 
             output.accept(ModBlocks.ENDLESS_UPGRADER.get());
             output.accept(ModBlocks.METEORITE.get());

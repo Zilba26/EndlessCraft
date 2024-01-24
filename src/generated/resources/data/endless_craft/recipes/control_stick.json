@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "*": {
+      "item": "minecraft:nether_star"
+    },
+    "/": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "pattern": [
+    "  *",
+    " / ",
+    "/  "
+  ],
+  "result": {
+    "item": "endless_craft:control_stick"
+  },
+  "show_notification": true
+}

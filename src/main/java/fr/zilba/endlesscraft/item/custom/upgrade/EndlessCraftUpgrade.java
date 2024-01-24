@@ -11,7 +11,9 @@ public enum EndlessCraftUpgrade {
   HEALTH("health", 5),
   LIFE_STEAL("life_steal", 5),
   FIRE_RESISTANCE("fire_resistance", 1),
-  INFINITE_DURABILITY("infinite_durability", 1);
+  INFINITE_DURABILITY("infinite_durability", 1),
+  NIGHT_VISION("night_vision", 1),
+  FLY("fly", 1);
 
   private final String key;
   private final int maxLevel;

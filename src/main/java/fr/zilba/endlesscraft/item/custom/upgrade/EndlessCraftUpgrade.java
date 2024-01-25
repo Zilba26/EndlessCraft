@@ -12,6 +12,7 @@ public enum EndlessCraftUpgrade {
   LIFE_STEAL("life_steal"),
   FIRE_RESISTANCE("fire_resistance"),
   INFINITE_DURABILITY("infinite_durability"),
+  TIME("time"),
   NIGHT_VISION("night_vision"),
   FLY("fly");
 

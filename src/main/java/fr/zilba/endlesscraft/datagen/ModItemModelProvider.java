@@ -32,7 +32,9 @@ public class ModItemModelProvider extends ItemModelProvider {
     simpleItem(ModItems.INFINITE_DURABILITY_UPGRADE);
     simpleItem(ModItems.NIGHT_VISION_UPGRADE);
     simpleItem(ModItems.FLY_UPGRADE);
+    simpleItem(ModItems.TIME_UPGRADE);
     simpleItem(ModItems.STAR_FRAGMENT);
+    simpleItem(ModItems.TELEPORTATION_STICK);
   }
 
   private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

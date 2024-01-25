@@ -27,7 +27,7 @@ public class ModBlocks {
   public static final RegistryObject<Block> METEORITE = registerBlock("meteorite",
       () -> new Block(BlockBehaviour.Properties.copy(Blocks.BLACKSTONE)));
 
-  public static final RegistryObject<Block> STAR = registerBlock("star",
+  public static final RegistryObject<Block> STAR = BLOCKS.register("star",
       () -> new Star(BlockBehaviour.Properties.copy(Blocks.BLACKSTONE).noOcclusion()
           .noParticlesOnBreak().strength(-1.0F, 3600000.0F)));
 

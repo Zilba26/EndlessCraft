@@ -34,6 +34,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     this.buildUpgradeRecipe(pWriter, ModItems.LIFE_STEAL_UPGRADE.get(), List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND_BLOCK, Items.NETHERITE_INGOT));
     this.buildUpgradeRecipe(pWriter, ModItems.ARMY_UPGRADE.get(), List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND_BLOCK, Items.NETHERITE_INGOT));
     this.buildUpgradeRecipe(pWriter, ModItems.FLY_UPGRADE.get(), List.of(Items.DIAMOND_BLOCK, Items.NETHERITE_SCRAP, Items.NETHERITE_INGOT, Items.NETHERITE_BLOCK));
+    this.buildUpgradeRecipe(pWriter, ModItems.TIME_UPGRADE.get(), List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND_BLOCK, Items.NETHERITE_INGOT));
   }
 
   private void buildUpgradeRecipe(Consumer<FinishedRecipe> pWriter, Item upgrade, List<ItemLike> levelsUpgrades) {

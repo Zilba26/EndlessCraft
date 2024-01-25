@@ -4,6 +4,7 @@
   "item.endless_craft.infinity_sword": "Infinity Sword",
   "item.endless_craft.temporal_bow": "Temporal Bow",
   "item.endless_craft.infinity_armor": "Infinity Armor",
+  "item.endless_craft.teleportation_stick": "Teleportation Stick",
 
   "item.endless_craft.army_upgrade": "Army Upgrade",
   "item.endless_craft.protection_upgrade": "Protection Upgrade",
@@ -25,6 +26,7 @@
   "tooltip.endless_craft.upgrade.infinite_durability": "Infinite Durability",
   "tooltip.endless_craft.upgrade.night_vision": "Night Vision",
   "tooltip.endless_craft.upgrade.fly": "Fly : Level %s",
+  "tooltip.endless_craft.teleport_stick.instructions": "Shift right click to set position",
 
   "block.endless_craft.endless_upgrader": "Endless Upgrader",
   "block.endless_craft.meteorite": "Meteorite",

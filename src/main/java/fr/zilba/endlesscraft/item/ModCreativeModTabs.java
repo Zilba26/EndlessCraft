@@ -29,6 +29,7 @@ public class ModCreativeModTabs {
             output.accept(ModItems.INFINITE_DURABILITY_UPGRADE.get());
             output.accept(ModItems.NIGHT_VISION_UPGRADE.get());
             output.accept(ModItems.FLY_UPGRADE.get());
+            output.accept(ModItems.TIME_UPGRADE.get());
             output.accept(ModItems.STAR_FRAGMENT.get());
             output.accept(ModItems.INFINITY_SWORD.get());
             output.accept(ModItems.TEMPORAL_ARC.get());
@@ -37,10 +38,10 @@ public class ModCreativeModTabs {
             output.accept(ModItems.INFINITY_LEGGINGS.get());
             output.accept(ModItems.INFINITY_BOOTS.get());
             output.accept(ModItems.INFINITY_ARMOR.get());
+            output.accept(ModItems.TELEPORTATION_STICK.get());
 
             output.accept(ModBlocks.ENDLESS_UPGRADER.get());
             output.accept(ModBlocks.METEORITE.get());
-            output.accept(ModBlocks.STAR.get());
           }))
           .build());
 

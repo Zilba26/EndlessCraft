@@ -1,10 +1,12 @@
 package fr.zilba.endlesscraft.item;
 
 import fr.zilba.endlesscraft.EndlessCraft;
+import fr.zilba.endlesscraft.item.custom.tools.TeleportationStick;
 import fr.zilba.endlesscraft.item.custom.tools.InfinityArmorEquipItem;
 import fr.zilba.endlesscraft.item.custom.TemporalArc;
 import fr.zilba.endlesscraft.item.custom.tools.InfinitySword;
 import fr.zilba.endlesscraft.item.custom.tools.ControlStickItem;
+import fr.zilba.endlesscraft.item.custom.upgrade.TimeUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.control_stick.ArmyUpgradeItem;
 import fr.zilba.endlesscraft.item.custom.upgrade.control_stick.ProtectionUpgradeItem;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_armor.FlyUpgrade;
@@ -35,6 +37,7 @@ public class ModItems {
   public static final RegistryObject<Item> INFINITE_DURABILITY_UPGRADE = ITEMS.register("infinite_durability_upgrade", InfiniteDurabilityUpgrade::new);
   public static final RegistryObject<Item> NIGHT_VISION_UPGRADE = ITEMS.register("night_vision_upgrade", NightVisionUpgrade::new);
   public static final RegistryObject<Item> FLY_UPGRADE = ITEMS.register("fly_upgrade", FlyUpgrade::new);
+  public static final RegistryObject<Item> TIME_UPGRADE = ITEMS.register("time_upgrade", TimeUpgrade::new);
 
   public static final RegistryObject<Item> STAR_FRAGMENT = ITEMS.register("star_fragment", () -> new Item(new Item.Properties()));
 
@@ -54,6 +57,9 @@ public class ModItems {
       () -> new ArmorItem(ModArmorMaterials.INFINITY, ArmorItem.Type.BOOTS, new Item.Properties()));
   public static final RegistryObject<Item> INFINITY_ARMOR = ITEMS.register("infinity_armor",
       () -> new InfinityArmorEquipItem(new Item.Properties().stacksTo(1)));
+
+  public static final RegistryObject<Item> TELEPORTATION_STICK = ITEMS.register("teleportation_stick",
+      () -> new TeleportationStick(new Item.Properties().durability(50)));
 
   public static void register(IEventBus eventBus) {
     ITEMS.register(eventBus);

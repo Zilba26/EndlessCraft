@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-23T22:57:57.2194027	Item Models: endless_craft
+// 1.20.1	2024-01-25T22:44:43.275439	Item Models: endless_craft
 17670c68e9ee65581483d531f73bc1e5054c17e8 assets/endless_craft/models/item/army_upgrade.json
 28d2f75059934dd485f822ad9e6eff9ad4bf8623 assets/endless_craft/models/item/control_stick.json
 8a0ec617ddda3289a84a309e04f7cacf97e37277 assets/endless_craft/models/item/fire_resistance_upgrade.json
@@ -15,3 +15,5 @@ a2e59073b4af0438626a6bdec477e27b4e243263 assets/endless_craft/models/item/life_s
 a284d31416bdbe9ba146c9954782444aebd043c2 assets/endless_craft/models/item/night_vision_upgrade.json
 bacab73e43d7dd36007184271438aeae711723c9 assets/endless_craft/models/item/protection_upgrade.json
 8c037ef06416c55f79dbe6fc469b1f0752f1fb2b assets/endless_craft/models/item/star_fragment.json
+115b4ee569170a6768505b15ab3abe970799f8c3 assets/endless_craft/models/item/teleportation_stick.json
+0b3cd55f1278c540e574e85c9bcd27f4d7e4162b assets/endless_craft/models/item/time_upgrade.json

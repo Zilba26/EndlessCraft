@@ -1,9 +1,9 @@
 {
   "type": "endless_craft:endless_upgrader_tool",
-  "base": {
-    "item": "endless_craft:control_stick"
-  },
   "addition": {
     "item": "endless_craft:protection_upgrade"
+  },
+  "base": {
+    "item": "endless_craft:control_stick"
   }
 }

@@ -1,9 +1,9 @@
 {
   "type": "endless_craft:endless_upgrader_tool",
+  "addition": {
+    "item": "endless_craft:night_vision_upgrade"
+  },
   "base": {
     "item": "endless_craft:infinity_armor"
-  },
-  "addition": {
-    "item": "endless_craft:infinite_durability_upgrade"
   }
 }

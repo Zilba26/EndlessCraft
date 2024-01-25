@@ -1,9 +1,9 @@
 {
   "type": "endless_craft:endless_upgrader_tool",
-  "base": {
-    "item": "endless_craft:infinity_armor"
-  },
   "addition": {
     "item": "endless_craft:fly_upgrade"
+  },
+  "base": {
+    "item": "endless_craft:infinity_armor"
   }
 }

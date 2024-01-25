@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "endless_craft:teleportation_stick_with_time_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_time_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endless_craft:time_upgrade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_time_upgrade",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "endless_craft:teleportation_stick_with_time_upgrade"
+    ]
+  },
+  "sends_telemetry_event": false
+}

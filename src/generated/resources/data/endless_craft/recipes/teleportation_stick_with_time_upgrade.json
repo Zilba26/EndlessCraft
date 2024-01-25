@@ -1,0 +1,9 @@
+{
+  "type": "endless_craft:endless_upgrader_tool",
+  "addition": {
+    "item": "endless_craft:time_upgrade"
+  },
+  "base": {
+    "item": "endless_craft:teleportation_stick"
+  }
+}

@@ -14,6 +14,7 @@ public enum EndlessCraftUpgrade {
   INFINITE_DURABILITY("infinite_durability"),
   TIME("time"),
   NIGHT_VISION("night_vision"),
+  SPEED("speed"),
   FLY("fly");
 
   private final String key;

@@ -11,6 +11,7 @@ import fr.zilba.endlesscraft.item.custom.upgrade.control_stick.ArmyUpgradeItem;
 import fr.zilba.endlesscraft.item.custom.upgrade.control_stick.ProtectionUpgradeItem;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_armor.FlyUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_armor.NightVisionUpgrade;
+import fr.zilba.endlesscraft.item.custom.upgrade.infinity_armor.SpeedUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.FireResistanceUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.InfiniteDurabilityUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.LifeStealUpgrade;
@@ -37,6 +38,7 @@ public class ModItems {
   public static final RegistryObject<Item> INFINITE_DURABILITY_UPGRADE = ITEMS.register("infinite_durability_upgrade", InfiniteDurabilityUpgrade::new);
   public static final RegistryObject<Item> NIGHT_VISION_UPGRADE = ITEMS.register("night_vision_upgrade", NightVisionUpgrade::new);
   public static final RegistryObject<Item> FLY_UPGRADE = ITEMS.register("fly_upgrade", FlyUpgrade::new);
+  public static final RegistryObject<Item> SPEED_UPGRADE = ITEMS.register("speed_upgrade", SpeedUpgrade::new);
   public static final RegistryObject<Item> TIME_UPGRADE = ITEMS.register("time_upgrade", TimeUpgrade::new);
 
   public static final RegistryObject<Item> STAR_FRAGMENT = ITEMS.register("star_fragment", () -> new Item(new Item.Properties()));

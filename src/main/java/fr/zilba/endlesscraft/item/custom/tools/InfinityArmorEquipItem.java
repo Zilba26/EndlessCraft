@@ -32,6 +32,13 @@ public class InfinityArmorEquipItem extends Item implements ICurioItem, EndlessC
               player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 0, false, false, true));
             }
           }
+
+          int speedLevel = EndlessCraftUpgrade.getItemLevel(stack, EndlessCraftUpgrade.SPEED);
+          if (speedLevel > 0) {
+            if (!player.hasEffect(MobEffects.MOVEMENT_SPEED) || player.getEffect(MobEffects.MOVEMENT_SPEED).getDuration() < 220) {
+              player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, speedLevel-1, false, false, true));
+            }
+          }
         }
       }
     }

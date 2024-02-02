@@ -52,6 +52,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     this.buildToolRecipe(pWriter, ModItems.INFINITY_ARMOR.get(), ModItems.FLY_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.INFINITY_ARMOR.get(), ModItems.INFINITE_DURABILITY_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.INFINITY_ARMOR.get(), ModItems.NIGHT_VISION_UPGRADE.get());
+    this.buildToolRecipe(pWriter, ModItems.INFINITY_ARMOR.get(), ModItems.SPEED_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.INFINITY_SWORD.get(), ModItems.FIRE_RESISTANCE_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.INFINITY_SWORD.get(), ModItems.LIFE_STEAL_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.INFINITY_SWORD.get(), ModItems.INFINITE_DURABILITY_UPGRADE.get());

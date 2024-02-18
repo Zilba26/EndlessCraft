@@ -18,6 +18,9 @@ public class ModRecipes {
   public static final RegistryObject<RecipeSerializer<EndlessUpgraderUpgradeRecipe>> ENDLESS_UPGRADER_UPGRADE_SERIALIZER =
       SERIALIZERS.register("endless_upgrader_upgrade", () -> EndlessUpgraderUpgradeRecipe.Serializer.INSTANCE);
 
+  public static final RegistryObject<RecipeSerializer<EndlessUpgraderGauntletRecipe>> ENDLESS_UPGRADER_GAUNTLET_SERIALIZER =
+      SERIALIZERS.register("endless_upgrader_gauntlet", () -> EndlessUpgraderGauntletRecipe.Serializer.INSTANCE);
+
   public static void register(IEventBus eventBus) {
     SERIALIZERS.register(eventBus);
   }

@@ -1,4 +1,4 @@
-package fr.zilba.endlesscraft.client;
+package fr.zilba.endlesscraft.client.renderer.block;
 
 import fr.zilba.endlesscraft.EndlessCraft;
 import fr.zilba.endlesscraft.block.entity.StarEntity;

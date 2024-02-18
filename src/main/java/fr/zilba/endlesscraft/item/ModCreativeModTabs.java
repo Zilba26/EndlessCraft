@@ -40,6 +40,11 @@ public class ModCreativeModTabs {
             output.accept(ModItems.INFINITY_BOOTS.get());
             output.accept(ModItems.INFINITY_ARMOR.get());
             output.accept(ModItems.TELEPORTATION_STICK.get());
+            output.accept(ModItems.ARCANE_GAUNTLET.get());
+            output.accept(ModItems.ELECTRIC_RUNE.get());
+            output.accept(ModItems.FIRE_RUNE.get());
+            output.accept(ModItems.ICE_RUNE.get());
+            output.accept(ModItems.WATER_RUNE.get());
 
             output.accept(ModBlocks.ENDLESS_UPGRADER.get());
             output.accept(ModBlocks.METEORITE.get());

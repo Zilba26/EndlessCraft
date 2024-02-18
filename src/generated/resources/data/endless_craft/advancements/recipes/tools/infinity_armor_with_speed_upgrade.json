@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_speed_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endless_craft:speed_upgrade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "endless_craft:infinity_armor_with_speed_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_speed_upgrade",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "endless_craft:infinity_armor_with_speed_upgrade"
+    ]
+  },
+  "sends_telemetry_event": false
+}

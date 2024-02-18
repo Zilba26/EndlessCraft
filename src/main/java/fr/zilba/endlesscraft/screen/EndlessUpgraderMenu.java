@@ -2,6 +2,7 @@ package fr.zilba.endlesscraft.screen;
 
 import fr.zilba.endlesscraft.block.ModBlocks;
 import fr.zilba.endlesscraft.block.entity.EndlessUpgraderBlockEntity;
+import fr.zilba.endlesscraft.item.custom.ArcaneGauntlet;
 import fr.zilba.endlesscraft.item.custom.tools.EndlessCraftToolsItem;
 import fr.zilba.endlesscraft.item.custom.upgrade.EndlessCraftUpgradeItem;
 import net.minecraft.network.FriendlyByteBuf;
@@ -40,7 +41,8 @@ public class EndlessUpgraderMenu extends AbstractContainerMenu {
         @Override
         public boolean mayPlace(ItemStack pStack) {
           return pStack.getItem() instanceof EndlessCraftToolsItem
-              || pStack.getItem() instanceof EndlessCraftUpgradeItem;
+              || pStack.getItem() instanceof EndlessCraftUpgradeItem
+              || pStack.getItem() instanceof ArcaneGauntlet;
         }
 
         @Override

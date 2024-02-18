@@ -1,0 +1,9 @@
+{
+  "type": "endless_craft:endless_upgrader_tool",
+  "addition": {
+    "item": "endless_craft:speed_upgrade"
+  },
+  "base": {
+    "item": "endless_craft:infinity_armor"
+  }
+}

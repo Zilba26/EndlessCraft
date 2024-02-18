@@ -1,10 +1,14 @@
 package fr.zilba.endlesscraft.datagen;
 
 import fr.zilba.endlesscraft.item.ModItems;
-import fr.zilba.endlesscraft.recipe.EndlessUpgraderToolRecipeBuilder;
-import fr.zilba.endlesscraft.recipe.EndlessUpgraderUpgradeRecipeBuilder;
+import fr.zilba.endlesscraft.recipe.builder.EndlessUpgraderGauntletRecipeBuilder;
+import fr.zilba.endlesscraft.recipe.builder.EndlessUpgraderToolRecipeBuilder;
+import fr.zilba.endlesscraft.recipe.builder.EndlessUpgraderUpgradeRecipeBuilder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -57,6 +61,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     this.buildToolRecipe(pWriter, ModItems.INFINITY_SWORD.get(), ModItems.LIFE_STEAL_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.INFINITY_SWORD.get(), ModItems.INFINITE_DURABILITY_UPGRADE.get());
     this.buildToolRecipe(pWriter, ModItems.TELEPORTATION_STICK.get(), ModItems.TIME_UPGRADE.get());
+
+    this.buildArcaneGauntletRecipe(pWriter, ModItems.WATER_RUNE.get());
+    this.buildArcaneGauntletRecipe(pWriter, ModItems.FIRE_RUNE.get());
+    this.buildArcaneGauntletRecipe(pWriter, ModItems.ICE_RUNE.get());
+    this.buildArcaneGauntletRecipe(pWriter, ModItems.ELECTRIC_RUNE.get());
   }
 
   private void buildUpgradeRecipe(Consumer<FinishedRecipe> pWriter, Item upgrade, List<ItemLike> levelsUpgrades) {
@@ -72,6 +81,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     EndlessUpgraderToolRecipeBuilder
         .craft(Ingredient.of(upgrade), Ingredient.of(tool), RecipeCategory.TOOLS)
         .unlockedBy("has_" + getItemName(upgrade), has(upgrade))
+        .save(pWriter);
+  }
+
+  private void buildArcaneGauntletRecipe(Consumer<FinishedRecipe> pWriter, Item rune) {
+    EndlessUpgraderGauntletRecipeBuilder
+        .craft(Ingredient.of(rune), RecipeCategory.TOOLS)
+        .unlockedBy("has_" + getItemName(rune), has(rune))
+        .unlockedBy("has_" + getItemName(ModItems.ARCANE_GAUNTLET.get()), has(ModItems.ARCANE_GAUNTLET.get()))
         .save(pWriter);
   }
 }

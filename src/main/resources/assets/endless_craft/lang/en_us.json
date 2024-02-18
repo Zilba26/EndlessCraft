@@ -14,6 +14,10 @@
   "item.endless_craft.infinite_durability_upgrade": "Infinite Durability Upgrade",
   "item.endless_craft.night_vision_upgrade": "Night Vision Upgrade",
   "item.endless_craft.fly_upgrade": "Fly Upgrade",
+  "item.endless_craft.water_rune": "Water rune",
+  "item.endless_craft.fire_rune": "Fire rune",
+  "item.endless_craft.ice_rune": "Ice rune",
+  "item.endless_craft.electric_rune": "Electric rune",
 
   "tooltip.endless_craft.upgrade.level": "Level : %s",
   "tooltip.endless_craft.upgrade.shift": "Hold Shift to show upgrades",
@@ -27,6 +31,9 @@
   "tooltip.endless_craft.upgrade.night_vision": "Night Vision",
   "tooltip.endless_craft.upgrade.fly": "Fly : Level %s",
   "tooltip.endless_craft.teleport_stick.instructions": "Shift right click to set position",
+  "tooltip.endless_craft.rune.activated": "Rune activated",
+  "tooltip.endless_craft.water_rune.information": "Go under water to activate",
+  "tooltip.endless_craft.arcane_gauntlet.no_element": "Use runes for get the power of elements",
 
   "block.endless_craft.endless_upgrader": "Endless Upgrader",
   "block.endless_craft.meteorite": "Meteorite",

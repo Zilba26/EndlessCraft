@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "minecraft:item/gaunlet"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "endless_craft:element": 0
+      },
+      "model": "endless_craft:item/soul_activated"
+    },
+    {
+      "predicate": {
+        "endless_craft:element": 1
+      },
+      "model": "endless_craft:item/reality_activated"
+    },
+    {
+      "predicate": {
+        "endless_craft:element": 2
+      },
+      "model": "endless_craft:item/space_activated"
+    },
+    {
+      "predicate": {
+        "endless_craft:element": 3
+      },
+      "model": "endless_craft:item/power_activated"
+    },
+    {
+      "predicate": {
+        "endless_craft:element": 4
+      },
+      "model": "endless_craft:item/time_activated"
+    },
+    {
+      "predicate": {
+        "endless_craft:element": 5
+      },
+      "model": "endless_craft:item/mind_activated"
+    }
+  ]
+}

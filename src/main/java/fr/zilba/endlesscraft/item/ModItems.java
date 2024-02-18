@@ -1,6 +1,7 @@
 package fr.zilba.endlesscraft.item;
 
 import fr.zilba.endlesscraft.EndlessCraft;
+import fr.zilba.endlesscraft.item.custom.ArcaneGauntlet;
 import fr.zilba.endlesscraft.item.custom.tools.TeleportationStick;
 import fr.zilba.endlesscraft.item.custom.tools.InfinityArmorEquipItem;
 import fr.zilba.endlesscraft.item.custom.TemporalArc;
@@ -15,6 +16,10 @@ import fr.zilba.endlesscraft.item.custom.upgrade.infinity_armor.SpeedUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.FireResistanceUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.InfiniteDurabilityUpgrade;
 import fr.zilba.endlesscraft.item.custom.upgrade.infinity_sword.LifeStealUpgrade;
+import fr.zilba.endlesscraft.item.custom.upgrade.runes.ElectricRune;
+import fr.zilba.endlesscraft.item.custom.upgrade.runes.FireRune;
+import fr.zilba.endlesscraft.item.custom.upgrade.runes.IceRune;
+import fr.zilba.endlesscraft.item.custom.upgrade.runes.WaterRune;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -62,6 +67,18 @@ public class ModItems {
 
   public static final RegistryObject<Item> TELEPORTATION_STICK = ITEMS.register("teleportation_stick",
       () -> new TeleportationStick(new Item.Properties().durability(50)));
+
+  public static final RegistryObject<Item> ARCANE_GAUNTLET = ITEMS.register("arcane_gauntlet",
+      () -> new ArcaneGauntlet(new Item.Properties().stacksTo(1)));
+
+  public static final RegistryObject<Item> WATER_RUNE = ITEMS.register("water_rune",
+      () -> new WaterRune(new Item.Properties().stacksTo(1)));
+  public static final RegistryObject<Item> FIRE_RUNE = ITEMS.register("fire_rune",
+      () -> new FireRune(new Item.Properties().stacksTo(1)));
+  public static final RegistryObject<Item> ELECTRIC_RUNE = ITEMS.register("electric_rune",
+      () -> new ElectricRune(new Item.Properties().stacksTo(1)));
+  public static final RegistryObject<Item> ICE_RUNE = ITEMS.register("ice_rune",
+      () -> new IceRune(new Item.Properties().stacksTo(1)));
 
   public static void register(IEventBus eventBus) {
     ITEMS.register(eventBus);

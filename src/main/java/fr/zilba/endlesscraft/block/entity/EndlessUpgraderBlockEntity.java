@@ -121,7 +121,7 @@ public class EndlessUpgraderBlockEntity extends BlockEntity implements MenuProvi
         return true;
       }
 
-      return recipe.get() instanceof EndlessUpgraderUpgradeRecipe;
+      return recipe.get() instanceof EndlessUpgraderRecipe;
     }
     return false;
   }

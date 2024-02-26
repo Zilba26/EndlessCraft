@@ -34,14 +34,6 @@ public class ArcaneGauntlet extends Item {
       ArcaneGauntletProjectile projectile = new ArcaneGauntletProjectile(pLevel, pPlayer, element);
       projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.8F, 1.0F);
       pLevel.addFreshEntity(projectile);
-//      if (Screen.hasShiftDown()) {
-//        ArcaneGauntletElement nextElement = element.ordinal() < ArcaneGauntletElement.values().length - 1
-//            ? ArcaneGauntletElement.values()[element.ordinal() + 1] : ArcaneGauntletElement.values()[0];
-//        ModTagUtils.setTag(itemStack, "element", nextElement.ordinal());
-//        pPlayer.displayClientMessage(Component.literal(nextElement.name()), true);
-//      } else {
-//
-//      }
     }
 
     return super.use(pLevel, pPlayer, pUsedHand);

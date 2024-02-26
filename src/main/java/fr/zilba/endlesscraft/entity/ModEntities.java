@@ -1,11 +1,9 @@
 package fr.zilba.endlesscraft.entity;
 
 import fr.zilba.endlesscraft.EndlessCraft;
-import fr.zilba.endlesscraft.entity.custom.ArcaneGauntletProjectile;
-import fr.zilba.endlesscraft.entity.custom.ElectricArc;
-import fr.zilba.endlesscraft.entity.custom.LightningBoltWithoutFire;
-import fr.zilba.endlesscraft.entity.custom.TemporalArrow;
+import fr.zilba.endlesscraft.entity.custom.*;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,7 +30,7 @@ public class ModEntities {
   public static final RegistryObject<EntityType<ElectricArc>> ELECTRIC_ARC =
       ENTITY_TYPE.register("electric_arc",
           () -> EntityType.Builder.<ElectricArc>of(ElectricArc::new, MobCategory.MISC)
-              .sized(0.0F, 0.0F).clientTrackingRange(16)
+              .noSave().sized(0.0F, 0.0F).clientTrackingRange(16)
               .updateInterval(Integer.MAX_VALUE).build("electric_arc"));
 
   public static final RegistryObject<EntityType<LightningBoltWithoutFire>> LIGHTNING_BOLT_WITHOUT_FIRE =
@@ -40,6 +38,12 @@ public class ModEntities {
           () -> EntityType.Builder.<LightningBoltWithoutFire>of(LightningBoltWithoutFire::new, MobCategory.MISC)
               .noSave().sized(0.0F, 0.0F).clientTrackingRange(16)
               .updateInterval(Integer.MAX_VALUE).build("lightning_bolt_without_fire"));
+
+  public static final RegistryObject<EntityType<TestEntity>> TEST_ENTITY =
+      ENTITY_TYPE.register("test_entity",
+          () -> EntityType.Builder.of(TestEntity::new, MobCategory.MISC)
+              .noSave().sized(0.0F, 0.0F).clientTrackingRange(16)
+              .updateInterval(Integer.MAX_VALUE).build("test_entity"));
 
   public static void register(IEventBus eventBus) {
     ENTITY_TYPE.register(eventBus);

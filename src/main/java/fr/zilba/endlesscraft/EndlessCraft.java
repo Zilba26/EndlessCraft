@@ -3,9 +3,7 @@ package fr.zilba.endlesscraft;
 import com.mojang.logging.LogUtils;
 import fr.zilba.endlesscraft.block.ModBlocks;
 import fr.zilba.endlesscraft.block.entity.ModBlocksEntities;
-import fr.zilba.endlesscraft.client.renderer.entity.ArcaneGauntletProjectileRenderer;
-import fr.zilba.endlesscraft.client.renderer.entity.ElectricArcRenderer;
-import fr.zilba.endlesscraft.client.renderer.entity.TemporalArrowRenderer;
+import fr.zilba.endlesscraft.client.renderer.entity.*;
 import fr.zilba.endlesscraft.entity.ModEntities;
 import fr.zilba.endlesscraft.item.ModCreativeModTabs;
 import fr.zilba.endlesscraft.item.ModItems;
@@ -99,6 +97,7 @@ public class EndlessCraft
             EntityRenderers.register(ModEntities.ARCANE_GAUNTLET_PROJECTILE.get(), ArcaneGauntletProjectileRenderer::new);
             EntityRenderers.register(ModEntities.ELECTRIC_ARC.get(), ElectricArcRenderer::new);
             EntityRenderers.register(ModEntities.LIGHTNING_BOLT_WITHOUT_FIRE.get(), LightningBoltRenderer::new);
+            EntityRenderers.register(ModEntities.TEST_ENTITY.get(), TestEntityRenderer2::new);
         }
     }
 

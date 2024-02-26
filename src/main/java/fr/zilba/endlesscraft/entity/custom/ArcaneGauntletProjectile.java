@@ -19,6 +19,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -86,42 +89,6 @@ public class ArcaneGauntletProjectile extends AbstractArrow implements IEntityAd
     }
   }
 
-  private void spawnParticles(ParticleOptions particle) {
-    double deltaX = getX() - xOld;
-    double deltaY = getY() - yOld;
-    double deltaZ = getZ() - zOld;
-    double dist = Math.ceil(Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) * 10);
-    for (double j = 0; j < dist; j++) {
-      double coeff = j / dist;
-      this.level().addParticle(particle,
-          (float) (xo + deltaX * coeff),
-          (float) (yo + deltaY * coeff) + 0.1, (float)
-              (zo + deltaZ * coeff),
-          0.005f * (random.nextFloat() - 0.5f),
-          0.005f * (random.nextFloat() - 0.5f),
-          0.005f * (random.nextFloat() - 0.5f));
-    }
-  }
-
-  public void playParticles(Color color) {
-    color = new Color(255, 25, 180);
-    double deltaX = getX() - xOld;
-    double deltaY = getY() - yOld;
-    double deltaZ = getZ() - zOld;
-    double dist = Math.ceil(Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) * 10);
-    for (double j = 0; j < dist; j++) {
-      double coeff = j / dist;
-      ParticleOptions particle = new ArcaneGauntletProjectileParticleType(color);
-      this.level().addParticle(particle,
-          (float) (xo + deltaX * coeff),
-          (float) (yo + deltaY * coeff) + 0.1, (float)
-              (zo + deltaZ * coeff),
-          0.005f * (random.nextFloat() - 0.5f),
-          0.005f * (random.nextFloat() - 0.5f),
-          0.005f * (random.nextFloat() - 0.5f));
-    }
-  }
-
   public void playParticles2(int red, int green, int blue) {
     double deltaX = getX() - xOld;
     double deltaY = getY() - yOld;
@@ -159,25 +126,25 @@ public class ArcaneGauntletProjectile extends AbstractArrow implements IEntityAd
           }
           break;
         case ELECTRIC:
-//          if (pResult.getEntity() instanceof LivingEntity source) {
-//            this.hurtEntity(source, 4);
-//            LivingEntity target = this.level().getNearestEntity(
-//                LivingEntity.class, // Type d'entité que vous recherchez
-//                TargetingConditions.forNonCombat(), // Conditions de ciblage
-//                source, // Entité source
-//                source.getX(), source.getY(), source.getZ(), // Coordonnées de l'entité source
-//                source.getBoundingBox().inflate(5, 5, 5) // Zone de recherche
-//            );
-//            System.out.println("firstTarget");
-//            System.out.println(target);
-//            ElectricArc arc = new ElectricArc(this.level(), source, target, 0);
-//            this.level().addFreshEntity(arc);
-//          }
-          LightningBoltWithoutFire lightningBolt = ModEntities.LIGHTNING_BOLT_WITHOUT_FIRE.get().create(this.level());
-          if (lightningBolt != null) {
-            lightningBolt.moveTo(Vec3.atBottomCenterOf(pResult.getEntity().getOnPos()));
-            this.level().addFreshEntity(lightningBolt);
+          if (pResult.getEntity() instanceof LivingEntity source) {
+            this.hurtEntity(source, 4);
+            LivingEntity target = this.level().getNearestEntity(
+                LivingEntity.class, // Type d'entité que vous recherchez
+                TargetingConditions.forNonCombat(), // Conditions de ciblage
+                source, // Entité source
+                source.getX(), source.getY(), source.getZ(), // Coordonnées de l'entité source
+                source.getBoundingBox().inflate(5, 5, 5) // Zone de recherche
+            );
+            System.out.println("Electric arc- " + source + " to " + target);
+            ElectricArc arc = new ElectricArc(this.level(), source.blockPosition(), target.blockPosition(), 0);
+            arc.moveTo(Vec3.atBottomCenterOf(pResult.getEntity().getOnPos()));
+            this.level().addFreshEntity(arc);
           }
+//          LightningBoltWithoutFire lightningBolt = ModEntities.LIGHTNING_BOLT_WITHOUT_FIRE.get().create(this.level());
+//          if (lightningBolt != null) {
+//            lightningBolt.moveTo(Vec3.atBottomCenterOf(pResult.getEntity().getOnPos()));
+//            this.level().addFreshEntity(lightningBolt);
+//          }
           this.discard();
           break;
         default:

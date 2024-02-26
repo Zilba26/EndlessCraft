@@ -1,127 +1,141 @@
 package fr.zilba.endlesscraft.client.renderer.entity;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.math.Axis;
 import fr.zilba.endlesscraft.entity.custom.ElectricArc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidStack;
+import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
 public class ElectricArcRenderer extends EntityRenderer<ElectricArc> {
+  RenderStateShard.ShaderStateShard RENDERTYPE_LIGHTNING_SHADER =
+      new RenderStateShard.ShaderStateShard(GameRenderer::getRendertypeLightningShader);
+  RenderStateShard.WriteMaskStateShard COLOR_DEPTH_WRITE =
+      new RenderStateShard.WriteMaskStateShard(true, true);
+  RenderStateShard.OutputStateShard WEATHER_TARGET = new RenderStateShard.OutputStateShard("weather_target", () -> {
+    if (Minecraft.useShaderTransparency()) {
+      Minecraft.getInstance().levelRenderer.getWeatherTarget().bindWrite(false);
+    }
+
+  }, () -> {
+    if (Minecraft.useShaderTransparency()) {
+      Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
+    }
+  });
+
+
+  RenderType LIGHTNING = RenderType.create("electric_arc",
+      DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS,
+      256, false, true,
+      RenderType.CompositeState.builder()
+          .setShaderState(RENDERTYPE_LIGHTNING_SHADER)
+          .setWriteMaskState(COLOR_DEPTH_WRITE)
+          .setOutputState(WEATHER_TARGET)
+          .createCompositeState(false));
+
   public ElectricArcRenderer(EntityRendererProvider.Context pContext) {
     super(pContext);
   }
 
   @Override
   public void render(ElectricArc pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-    Level level = pEntity.level();
-    BlockPos pos = pEntity.getOnPos();
+    VertexConsumer vertexconsumer = pBuffer.getBuffer(LIGHTNING);
+    Matrix4f matrix4f = pPoseStack.last().pose();
+    BlockPos target = pEntity.getTarget();
 
-    IClientFluidTypeExtensions fluidTypeExtensions = IClientFluidTypeExtensions.of(Fluids.WATER);
-    ResourceLocation stillTexture = fluidTypeExtensions.getStillTexture();
-    if (stillTexture == null)
-      return;
-
-    FluidState state = Fluids.WATER.defaultFluidState();
-
-    TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillTexture);
-    int tintColor = fluidTypeExtensions.getTintColor(state, level, pos);
-
-    float height = 0.5f;
-
-    VertexConsumer builder = pBuffer.getBuffer(ItemBlockRenderTypes.getRenderLayer(state));
-
-    drawQuad(builder, pPoseStack, 0.25f, height, 0.25f, 0.75f, height, 0.75f, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), pPackedLight, tintColor);
-
-    drawQuad(builder, pPoseStack, 0.25f, 0, 0.25f, 0.75f, height, 0.25f, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), pPackedLight, tintColor);
-
-    pPoseStack.pushPose();
-    pPoseStack.mulPose(Axis.YP.rotationDegrees(180));
-    pPoseStack.translate(-1f, 0, -1.5f);
-    drawQuad(builder, pPoseStack, 0.25f, 0, 0.75f, 0.75f, height, 0.75f, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), pPackedLight, tintColor);
-    pPoseStack.popPose();
-
-    pPoseStack.pushPose();
-    pPoseStack.mulPose(Axis.YP.rotationDegrees(90));
-    pPoseStack.translate(-1f, 0, 0);
-    drawQuad(builder, pPoseStack, 0.25f, 0, 0.25f, 0.75f, height, 0.25f, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), pPackedLight, tintColor);
-    pPoseStack.popPose();
-
-    pPoseStack.pushPose();
-    pPoseStack.mulPose(Axis.YN.rotationDegrees(90));
-    pPoseStack.translate(0, 0, -1f);
-    drawQuad(builder, pPoseStack, 0.25f, 0, 0.25f, 0.75f, height, 0.25f, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), pPackedLight, tintColor);
-    pPoseStack.popPose();
+    basicQuad(matrix4f, vertexconsumer, 0, 0, 0, (float) (target.getX() - pEntity.getX()),
+        (float) (target.getY() - pEntity.getY()), (float) (target.getZ() - pEntity.getZ()));
   }
 
-  private static void drawVertex(VertexConsumer builder, PoseStack poseStack, float x, float y, float z, float u, float v, int packedLight, int color) {
-    builder.vertex(poseStack.last().pose(), x, y, z)
-        .color(color)
-        .uv(u, v)
-        .uv2(packedLight)
-        .normal(1, 0, 0)
-        .endVertex();
+  public void render2(ElectricArc pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+    if (pEntity.getTarget() != null && pEntity.getSource() != null) {
+      BlockPos target = pEntity.getTarget();
+
+      float[] afloat = new float[8];
+      float[] afloat1 = new float[8];
+      float f = 0.0F;
+      float f1 = 0.0F;
+      RandomSource randomsource = RandomSource.create(pEntity.seed);
+
+      for(int i = 7; i >= 0; --i) {
+        afloat[i] = f;
+        afloat1[i] = f1;
+        f += (float)(randomsource.nextInt(11) - 5);
+        f1 += (float)(randomsource.nextInt(11) - 5);
+      }
+
+      VertexConsumer vertexconsumer = pBuffer.getBuffer(LIGHTNING);
+      Matrix4f matrix4f = pPoseStack.last().pose();
+
+      int j = 0;
+      RandomSource randomsource1 = RandomSource.create(pEntity.seed);
+
+      int l = 7;
+      int i1 = 0;
+
+      float f2 = afloat[l] - f;
+      float f3 = afloat1[l] - f1;
+
+      for(int j1 = l; j1 >= i1; --j1) {
+        float f4 = f2;
+        float f5 = f3;
+        f2 += (float) (randomsource1.nextInt(11) - 5);
+        f3 += (float)(randomsource1.nextInt(11) - 5);
+
+        float f10 = 0.1F + (float)j * 0.2F;
+        f10 *= (float) j1 * 0.1F + 1.0F;
+
+        float f11 = 0.1F + (float)j * 0.2F;
+        f11 *= ((float) j1 - 1.0F) * 0.1F + 1.0F;
+
+        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, f10, f11, false, false, true, false);
+        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, f10, f11, true, false, true, true);
+        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, f10, f11, true, true, false, true);
+        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, f10, f11, false, true, false, false);
+      }
+    }
   }
 
-  private static void drawQuad(VertexConsumer builder, PoseStack poseStack, float x0, float y0, float z0, float x1, float y1, float z1, float u0, float v0, float u1, float v1, int packedLight, int color) {
-    drawVertex(builder, poseStack, x0, y0, z0, u0, v0, packedLight, color);
-    drawVertex(builder, poseStack, x0, y1, z1, u0, v1, packedLight, color);
-    drawVertex(builder, poseStack, x1, y1, z1, u1, v1, packedLight, color);
-    drawVertex(builder, poseStack, x1, y0, z0, u1, v0, packedLight, color);
+  private static void quad(Matrix4f pMatrix, VertexConsumer pConsumer, float x1, float z1, int y, float x2, float z2, float o1, float o2, boolean x1b, boolean z1b, boolean x2b, boolean z2b) {
+    float red = 1F;
+    float green = 1F;
+    float blue = 0F;
+    float alpha = 1F;
+    pConsumer.vertex(pMatrix, x1 + (x1b ? o2 : -o2), y * 16, z1 + (z1b ? o2 : -o2)).color(red, green, blue, alpha).endVertex();
+    pConsumer.vertex(pMatrix, x2 + (x1b ? o1 : -o1), (y + 1) * 16, z2 + (z1b ? o1 : -o1)).color(red, green, blue, alpha).endVertex();
+    pConsumer.vertex(pMatrix, x2 + (x2b ? o1 : -o1), (y + 1) * 16, z2 + (z2b ? o1 : -o1)).color(red, green, blue, alpha).endVertex();
+    pConsumer.vertex(pMatrix, x1 + (x2b ? o2 : -o2), y * 16, z1 + (z2b ? o2 : -o2)).color(red, green, blue, alpha).endVertex();
   }
 
-  //  @Override
-//  public void render(ElectricArc pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-//    LivingEntity source = pEntity.getSource();
-//    LivingEntity target = pEntity.getTarget();
-//    System.out.println("Rendering electric arc- " + source + " to " + target);
-//
-//    if (source != null && target != null) {
-//      System.out.println(pEntityYaw + "-" + pPartialTick + "-" + pPackedLight);
-//      Vec3 sourcePos = source.position();
-//      Vec3 targetPos = target.position();
-//
-//      RenderType renderType = RenderType.create("electric_arc", DefaultVertexFormat.POSITION_COLOR,
-//          VertexFormat.Mode.LINES, 256, false, true,
-//          RenderType.CompositeState.builder()
-//              .createCompositeState(false));
-//      VertexConsumer vertexConsumer = pBuffer.getBuffer(renderType);
-//      vertexConsumer.vertex(pPoseStack.last().pose(), (float) sourcePos.x, (float) sourcePos.y, (float) sourcePos.z)
-//          .color(255, 255, 0, 255)
-//          .endVertex();
-//      vertexConsumer.vertex(pPoseStack.last().pose(), (float) targetPos.x, (float) targetPos.y, (float) targetPos.z)
-//          .color(255, 255, 0, 255)
-//          .endVertex();
-//    }
-//  }
+  private static void basicQuad(Matrix4f pMatrix, VertexConsumer pConsumer, float x1, float y1, float z1, float x2, float y2, float z2) {
+    float red = 1F;
+    float green = 1F;
+    float blue = 0F;
+    float alpha = 1F;
+    pConsumer.vertex(pMatrix, x1, y1, z1).color(red, green, blue, alpha).endVertex();
+    pConsumer.vertex(pMatrix, x1, y2, z2).color(red, green, blue, alpha).endVertex();
+    pConsumer.vertex(pMatrix, x2, y2, z2).color(red, green, blue, alpha).endVertex();
+    pConsumer.vertex(pMatrix, x2, y1, z1).color(red, green, blue, alpha).endVertex();
+  }
 
   @Override
   public ResourceLocation getTextureLocation(ElectricArc pEntity) {
-    return null;
+    return TextureAtlas.LOCATION_BLOCKS;
   }
 }
